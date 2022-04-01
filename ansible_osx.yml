@@ -18,7 +18,6 @@
         name: [
           adoptopenjdk/openjdk,
           fishtown-analytics/dbt,
-          heroku/brew,
           homebrew/cask-versions,
           thoughtbot/formulae,
           weaveworks/tap,
@@ -53,9 +52,11 @@
           'fzf',
           'gnu-time',
           'gpg',
-          'heroku',
           'htop',
-          'imagemagick@6',
+          'helm',
+          'helmsman',
+          'istioctl',
+          'jq',
           'kubectx',
           'kubernetes-cli',
           'kubernetes-helm',
@@ -63,7 +64,8 @@
           'libxslt',
           'libyaml',
           'mas',
-          'openssl' ,
+          'openssl',
+          'octant',
           'pkg-config',
           'postgresql',
           'rcm',
@@ -79,6 +81,7 @@
           'yarn',
           'zlib',
           'zsh',
+          'smartmontools'
         ]
         state: present
         update_homebrew: yes
@@ -179,6 +182,7 @@
         - nodejs
         - python
         - erlang
+        - terragrunt
 
     - name: "Install Default Python"
       shell: |
