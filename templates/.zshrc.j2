@@ -2,9 +2,9 @@
 # instead make changes to ~/.zshrc.personal which is loaded after this file
 
 # Setup some standard paths
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
+#export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+##export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=/usr/local/opt/imagemagick@6/bin:${PATH}
 
 export optflags="-Wno-error=implicit-function-declaration"
@@ -21,6 +21,9 @@ ZSH_THEME="robbyrussell"
 plugins=(git kubectl)
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_DISABLE_COMPFIX=true
+
+alias wakehpbuntu="wakeonlan a0:8c:fd:c5:45:c3"
+alias dojoserver="wakeonlan e0:4f:43:29:61:33"
 
 # Load personal pre oh-my-zsh init config which should be stored in ~/.zshrc.personal.before
 # E.g. setting ZSH theme etc
