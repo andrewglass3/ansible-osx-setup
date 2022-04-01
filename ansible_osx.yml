@@ -30,20 +30,8 @@
       ignore_errors: yes
       with_items:
         - 1password
-        - android-sdk
-        - android-studio
-        - datagrip
-        - docker
-        - dropbox
-        - figma
-        - google-chrome
-        - google-cloud-sdk
         - iterm2
-        - kindle
-        - ngrok
         - slack
-        - sublime-text
-        - telegram
         - visual-studio-code
         - vlc
         - zoom
@@ -134,12 +122,12 @@
         owner: "{{ lookup('env', 'USER') }}"
         force: yes
 
-    - name: Create a default VSCode keuybinding configuration
-      template:
-        src: templates/vscode-keybindings.json.j2
-        dest: /Users/{{ lookup('env', 'USER') }}/Library/Application Support/Code/User/keybindings.json
-        owner: "{{ lookup('env', 'USER') }}"
-        force: yes
+#    - name: Create a default VSCode keuybinding configuration
+#      template:
+#        src: templates/vscode-keybindings.json.j2
+#        dest: /Users/{{ lookup('env', 'USER') }}/Library/Application Support/Code/User/keybindings.json
+#        owner: "{{ lookup('env', 'USER') }}"
+#        force: yes
 
     # Add something which ensures path is set here
     - name: Install VSCode extensions
@@ -165,11 +153,14 @@
         - xabikos.javascriptsnippets
         - streetsidesoftware.code-spell-checker
         - fabiospampinato.vscode-todo-plus
+        - esbenp.prettier-vscode
+        - hashicorp.terraform
+        - wmaurer.change-case
 
     - git:
         repo: https://github.com/asdf-vm/asdf.git
         dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
-        version: v0.8.1
+        version: v0.9.0
 
     - name: "Create a default asdf configuration"
       template:
