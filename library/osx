@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+
+from ansible.module_utils.basic import *
+import subprocess
+import shlex
+import os
+import urllib
+import urllib2
+import shutil
+import re
+import errno
+from plistlib import readPlistFromString
+from tempfile import mkdtemp
+
+# TODO correctly capture errors to print back
+#        refactor as a part of this
+# TODO implement version checking
+
+def run(command):
+    try:
+        return subprocess.check_output(shlex.split(command))
+    except subprocess.CalledProcessError, e:
+        raise
+
+def download_location_check(url):
+    location = urllib2.urlopen(url)
+    return location.url
+
+def dmg_install(file_path):
+    xml_string = run("hdiutil mount -plist -nobrowse -readonly -noidme -mountrandom /tmp {}".format(file_path))
+    hdiutil_info = readPlistFromString(xml_string)
+    for entity in hdiutil_info["system-entities"]:
+        if 'mount-point' in entity.keys():
+            mounted_path = entity["mount-point"]
+            try:
+                items = os.listdir(mounted_path)
+                for item in items:
+                    install("{p}/{i}".format(p=mounted_path,i=item))
+            finally:
+                run("hdiutil eject {}".format(mounted_path))
+
+def pkg_install(file_path):
+    run("installer -pkg {} -target /".format(file_path))
+
+def zip_install(file_path):
+    run("ditto -xk {} /Applications/".format(file_path))
+
+def app_install(file_path):
+    run("cp -r {} /Applications/".format(file_path))
+
+def install(file_path):
+    if re.search("\.dmg", file_path):
+        dmg_install(file_path)
+    elif re.search("\.pkg", file_path):
+        pkg_install(file_path)
+    elif re.search("\.zip", file_path):
+        zip_install(file_path)
+    elif re.search("\.app", file_path):
+        app_install(file_path)
+
+def download(url):
+    try:
+        tempdir = mkdtemp()
+        download_url = download_location_check(url)
+        filename = download_url.split('/')[-1]
+        file_path = "{dir}/{file}".format(dir=tempdir, file=filename)
+        urllib.urlretrieve(download_url, file_path)
+        install(file_path)
+        return filename
+    finally:
+        shutil.rmtree(tempdir)
+
+def main():
+    module = AnsibleModule(
+        argument_spec = dict(
+            state   = dict(default='latest', choices=['present', 'latest']),
+            url     = dict(required=True),
+            creates = dict()
+            )
+        )
+    state = module.params.get('state')
+    name = module.params.get('name')
+    url = module.params.get('url')
+    creates = module.params.get('creates')
+    if state == "present" and creates is None:
+        module.fail_json(msg="'state=present' requires the 'creates' argument")
+        exit(1)
+    elif state == "present" and os.path.exists(creates):
+        module.exit_json(changed=False)
+        exit(0)
+    else:
+        try:
+            filename = download(url)
+            module.exit_json(changed=True,stdout="Installed {}".format(filename))
+            exit(0)
+        except Exception, e:
+            module.fail_json(msg="Download/Install failed for url: {}, with message: {}".format(url,str(e)))
+            exit(1)
+
+if __name__ == "__main__":
+    main()
