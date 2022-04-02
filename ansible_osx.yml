@@ -91,9 +91,9 @@
         state: present
         update_homebrew: yes
 
-    - name: "Install from Mac app store"
-      shell: mas install {{ item }}
-      with_items:
+#    - name: "Install from Mac app store"
+#      shell: mas install {{ item }}
+#      with_items:
 #        - 497799835 # xcode - I dont need this but leaving as an example
 
     - name: Get the path to ZSH
