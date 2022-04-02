@@ -81,6 +81,7 @@
           'unzip',
           'vim',
           'watchman',
+          'wakeonlan',
           'wireshark',
           'xz',
           'yarn',
