@@ -26,6 +26,10 @@ The easiest way to understand what's installed is to read the contents of `ansib
 - VSCode + default plugins and configuration
 - Lots of other tools and utilities
 
+## Potential Error Causes 
+
+Running this ansible playbook against a machine which has manually installed packages may result in errors - even though it can see the package is installed. This is something I need to tidy and improve the failure logic. Ideally this should be run against a clean install mac. For the meant time let brew and ASDF manage your packages which would normally be installed with this repo.
+
 ## Customising
 
 Everything can be customised by editing `ansible_osx.yml`.
