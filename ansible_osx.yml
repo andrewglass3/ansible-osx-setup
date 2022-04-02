@@ -81,12 +81,12 @@
           'unzip',
           'vim',
           'watchman',
-          'wireshark'
+          'wireshark',
           'xz',
           'yarn',
           'zlib',
           'zsh',
-          'smartmontools'
+          'smartmontools',
         ]
         state: present
         update_homebrew: yes
