@@ -29,6 +29,7 @@
       ignore_errors: yes
       with_items:
         - 1password
+        - google-chrome
         - iterm2
         - slack
         - visual-studio-code
@@ -159,7 +160,7 @@
     - git:
         repo: https://github.com/asdf-vm/asdf.git
         dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
-        version: v0.9.0
+        version: v0.8.1
 
     - name: "Create a default asdf configuration"
       template:
