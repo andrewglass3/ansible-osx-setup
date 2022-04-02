@@ -34,7 +34,7 @@
         - slack
         - visual-studio-code
         - vlc
-        - zoom
+#        - zoom
         - tuple
         - skype-preview
 
@@ -189,6 +189,13 @@
         pip3 install ansible
         pip3 instal cqlsh
         asdf reshim python
+    
+    - name: install zoom
+      osx: >
+        url=https://zoom.us/client/latest/Zoom.pkg
+        #creates=/usr/local/zoom
+        state=present
+      when: ansible_osx.mac.has_zoom != true
 
         
 
