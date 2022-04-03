@@ -155,7 +155,8 @@
         - mkxml.vscode-filesize
         - editorconfig.editorconfig
         - mikestead.dotenv
-        - wmaurer.change-case 
+        - wmaurer.change-case
+        - ms-python.python
 
     - git:
         repo: https://github.com/asdf-vm/asdf.git
@@ -190,12 +191,12 @@
         pip3 instal cqlsh
         asdf reshim python
     
-    - name: install zoom
-      osx: >
-        url=https://zoom.us/client/latest/Zoom.pkg
-        #creates=/usr/local/zoom
-        state=present
-      when: ansible_osx.mac.has_zoom != true
+#    - name: install zoom
+#      osx: >
+#        url=https://zoom.us/client/latest/Zoom.pkg
+#        #creates=/usr/local/zoom
+#        state=present
+#      #when: ansible_osx.mac.has_zoom != true
 
         
 
