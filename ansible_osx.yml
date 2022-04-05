@@ -45,6 +45,7 @@
           'automake',
           'aws-iam-authenticator',
           'awscli',
+          'asdf',
           'bfg',
           'coreutils',
           'curl',
@@ -159,17 +160,17 @@
         - wmaurer.change-case
         - ms-python.python
 
-    - git:
-        repo: https://github.com/asdf-vm/asdf.git
-        dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
-        version: v0.8.1
-
-    - name: "Create a default asdf configuration"
-      template:
-        src: templates/.asdfrc.j2
-        dest: /Users/{{ lookup('env', 'USER') }}/.asdfrc
-        owner: "{{ lookup('env', 'USER') }}"
-        force: yes
+#    - git:
+#        repo: https://github.com/asdf-vm/asdf.git
+#        dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
+#        version: v0.8.1##
+#
+#    - name: "Create a default asdf configuration"
+#      template:
+#        src: templates/.asdfrc.j2
+#        dest: /Users/{{ lookup('env', 'USER') }}/.asdfrc
+#        owner: "{{ lookup('env', 'USER') }}"
+#        force: yes
 
     - name: "Install asdf plugins"
       shell: |

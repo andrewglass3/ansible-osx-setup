@@ -36,6 +36,10 @@ source $ZSH/oh-my-zsh.sh
 # Most ZSH config e.g. aliases etc goes here
 if [ -f ~/.zshrc.personal.after ]; then . ~/.zshrc.personal.after; fi
 
-# Load asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+## Load asdf
+#. $HOME/.asdf/asdf.sh
+#. $HOME/.asdf/completions/asdf.bash
+
+. /opt/homebrew/opt/asdf/asdf.sh
+
+. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
