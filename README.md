@@ -6,9 +6,8 @@ This repository contains an Ansible configuration for setting up a Mac from scra
 
 There's a simple shell script in `bin/bootstrap` which will perform the initial steps of:
 
-1. Installing Xcode
-2. Installing Ansible
-3. Fetching required Ansible roles and collections
+1. Installing Ansible
+2. Fetching required Ansible roles and collections
 
 And then runs the main playbook `ansible_osx.yml`.
 
