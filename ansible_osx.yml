@@ -160,6 +160,7 @@
         - wmaurer.change-case
         - ms-python.python
 
+# Installing asdf via brew
 #    - git:
 #        repo: https://github.com/asdf-vm/asdf.git
 #        dest: "/Users/{{ lookup('env', 'USER') }}/.asdf"
